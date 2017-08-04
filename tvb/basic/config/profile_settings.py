@@ -35,7 +35,6 @@ Prepare TVB settings to be grouped under various profile classes.
 """
 import os
 import sys
-import importlib
 from tvb.basic.config import stored
 from tvb.basic.config.environment import Environment
 from tvb.basic.config.settings import ClusterSettings, DBSettings, VersionSettings, WebSettings
@@ -190,7 +189,7 @@ class BaseSettingsProfile(object):
                 if (key.startswith("tvb.") and sys.modules[key] and not 'lab' in key and
                         not key.startswith("tvb.basic.profile") and not 'profile_settings' in key):
                     try:
-                        importlib.reload(sys.modules[key])
+                        reload(sys.modules[key])
                     except LibraryImportError:
                         pass
 
